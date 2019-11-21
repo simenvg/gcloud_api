@@ -1,4 +1,4 @@
-runtime: python3
+runtime: python38
 service: api
 entrypoint: gunicorn -b :$PORT main:app
 
