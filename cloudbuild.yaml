@@ -5,6 +5,7 @@ steps:
     'app', 
     'deploy', 
     'app.yaml',
+    '--version=test',
     '--no-promote',
     '--quiet'
     ]
