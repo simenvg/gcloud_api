@@ -8,7 +8,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-container = ['Hello World!', 'Google']
+container = ['Hello World!', 'Google', "SIMEN"]
 
 @app.route('/mainpage/')
 def mainpage():
