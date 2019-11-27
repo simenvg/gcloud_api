@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
-from flask import Flask, jsonify
+import util
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 
@@ -10,16 +10,19 @@ app = Flask(__name__)
 CORS(app)
 container = ['Hello World!', 'Google', "SIMEN", "LARS"]
 
-@app.route('/mainpage/')
-def mainpage():
-	return jsonify(container)
+@app.route('/open/')
+def openTest():
+	return "This is an open endpoint"
 
-@app.route('/get/<number>')
-def get(number):
-	if int(number) > len(container):
-		return 'That number is greater than the size of the container'
+@app.route('/closed/')
+def closedTest():
+	idToken = request.headers.get('idToken')
+	decodedToken = util.verifyIdToken(idToken)
+	if (decodedToken==None or decodedToken['iss'] != 'https://securetoken.google.com/fluent-webbing-257713'):
+		return "NoAccess", 403
 	else:
-		return jsonify(container[int(number)])
+		return "yuhu, " + decodedToken['email'] + " you are logged in", 200
+	
 
 @app.route('/post/<word>')
 def post(word):
