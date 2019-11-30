@@ -1,4 +1,6 @@
 flask
 gunicorn==19.9.0
 flask-cors
+flask_mysqldb
 firebase-admin
+preprocessing
